@@ -1,8 +1,32 @@
+let penMode = "normal";
+let penColor;
+
 const container = document.querySelector(".container");
 
+const colorPicker = document.querySelector(".color-picker");
+const slider = document.querySelector(".slider");
 
-function clearDivs() {
+const rainbowButton = document.querySelector(".rainbow-button");
+const shadeButton = document.querySelector(".shade-button");
+const normalButton = document.querySelector(".normal-button");
+
+const clearButton = document.querySelector(".clear-button");
+
+function resetCanvas() {
     container.innerHTML = "";
+}
+
+function clearCanvas() {
+    const divs = document.querySelectorAll(".container div");
+
+    divs.forEach((div) => {
+        div.style.backgroundColor = "white";
+        div.style.opacity = "";
+    })
+}
+
+function getRandomRGBText() {
+    return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
 
 function createDivs(length) {
@@ -14,29 +38,52 @@ function createDivs(length) {
         div.style.height = `${800 / length}px`;
 
         div.addEventListener("mouseenter", (e) => {
-            e.target.style.backgroundColor = "black";
+            const style = e.target.style;
+
+            switch (penMode) {
+                case "shade": 
+                    style.opacity = +style.opacity + 0.1; 
+                case "normal": 
+                    style.backgroundColor = penColor;
+                    break;
+                case "rainbow":
+                    style.backgroundColor = getRandomRGBText();
+                    break;
+            }
         })
 
         container.appendChild(div);
     } 
 }
 
-
-const clearButton = document.querySelector(".clear-button");
-
 clearButton.addEventListener("click", (e) => {
-    const divs = document.querySelectorAll(".container div");
-
-    divs.forEach((div) => {
-        div.style.backgroundColor = "white";
-    })
+    clearCanvas();
 })
 
-const slider = document.querySelector(".slider");
-
 slider.oninput = function() {
-    clearDivs();
+    resetCanvas();
     createDivs(this.value);
 }
+
+rainbowButton.addEventListener("click", (e) => {
+    clearCanvas();
+    penMode = "rainbow";
+})
+
+shadeButton.addEventListener("click", () => {
+    clearCanvas();
+    penMode = 'shade';
+})
+
+normalButton.addEventListener("click", () => {
+    clearCanvas();
+    penMode = "normal";
+})
+
+colorPicker.oninput = function () {
+    penColor = this.value;
+}
+
+penColor = colorPicker.value;
 
 createDivs(8);
