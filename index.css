@@ -11,7 +11,7 @@ body {
 }
 
 .box {
-    flex: 1 1 100px; 
+    flex: 1 1 auto; 
     background-color: white;
     border: none;
 }
