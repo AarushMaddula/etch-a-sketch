@@ -22,18 +22,21 @@ function createDivs(length) {
 }
 
 
-const button = document.querySelector(".button");
+const clearButton = document.querySelector(".clear-button");
 
-button.addEventListener("click", (e) => {
-    const num = prompt("How many squares per side? ");
+clearButton.addEventListener("click", (e) => {
+    const divs = document.querySelectorAll(".container div");
 
-    if (+num === NaN || num > 100 || num < 1 || num % 1 !== 0) {
-        alert("Invalid Number")
-    } else {
-        clearDivs();
-        createDivs(num);
-    }
-
+    divs.forEach((div) => {
+        div.style.backgroundColor = "white";
+    })
 })
+
+const slider = document.querySelector(".slider");
+
+slider.oninput = function() {
+    clearDivs();
+    createDivs(this.value);
+}
 
 createDivs(8);
