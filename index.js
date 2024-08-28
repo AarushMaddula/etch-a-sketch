@@ -1,16 +1,20 @@
-let penMode = "normal";
-let penColor;
+const CANVAS_SIZE = 500;
 
 const container = document.querySelector(".container");
 
 const colorPicker = document.querySelector(".color-picker");
 const slider = document.querySelector(".slider");
 
+const sizeDisplay = document.querySelector(".size-display");
+
 const rainbowButton = document.querySelector(".rainbow-button");
 const shadeButton = document.querySelector(".shade-button");
 const normalButton = document.querySelector(".normal-button");
 
 const clearButton = document.querySelector(".clear-button");
+
+let penMode = "normal";
+let penColor;
 
 function resetCanvas() {
     container.innerHTML = "";
@@ -34,8 +38,8 @@ function createDivs(length) {
         const div = document.createElement("div");
 
         div.setAttribute("class", "box");
-        div.style.width = `${800 / length}px`;
-        div.style.height = `${800 / length}px`;
+        div.style.width = `${CANVAS_SIZE / length}px`;
+        div.style.height = `${CANVAS_SIZE / length}px`;
 
         div.addEventListener("mouseenter", (e) => {
             const style = e.target.style;
@@ -63,6 +67,7 @@ clearButton.addEventListener("click", (e) => {
 slider.oninput = function() {
     resetCanvas();
     createDivs(this.value);
+    sizeDisplay.textContent = `${this.value} x ${this.value}`;
 }
 
 rainbowButton.addEventListener("click", (e) => {
@@ -86,4 +91,8 @@ colorPicker.oninput = function () {
 
 penColor = colorPicker.value;
 
-createDivs(8);
+container.style.height = `${CANVAS_SIZE}px`;
+container.style.width = `${CANVAS_SIZE}px`;
+
+sizeDisplay.textContent = `${slider.value} x ${slider.value}`;
+createDivs(slider.value);

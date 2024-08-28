@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Jersey+10&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Orbitron:wght@400..900&display=swap');
+
 body {
     background-color: lightgray;
+    font-family: "Lato";
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
 
-    height: 800px;
-    width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
 .box {
@@ -17,8 +19,39 @@ body {
 }
 
 .color-picker {
-    border: 0px;
+    border: none;
     height: 50px;
     width: 50px;
-    
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.settings button{
+    width: 175px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+}
+
+.size-display {
+    margin-top: 10px;
+}
+
+.slider {
+    margin-bottom: 15px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    padding: 50px;
 }
